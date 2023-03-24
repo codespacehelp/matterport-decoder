@@ -9,12 +9,11 @@ const result = protobuf.parse(fs.readFileSync("dam.proto", "utf8"));
 const root = result.root;
 const DAMFile = root.lookupType("DAMFile");
 
-// if (process.argv.length < 3) {
-//   console.log("Usage: node parse.js <dam_file_path>");
-//   process.exit(1);
-// }
-// const filePath = process.argv[2];
-const filePath = "assets/national_gallery/national_gallery.dam";
+if (process.argv.length < 3) {
+  console.log("Usage: node parse.js <dam_file_path>");
+  process.exit(1);
+}
+const filePath = process.argv[2];
 
 // Read the protobuf file content
 const buffer = fs.readFileSync(filePath);
