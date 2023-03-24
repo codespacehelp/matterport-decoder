@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+// type i
+message DAMFile {
+	repeated Chunk chunk = 1;
+	repeated QuantizedChunk quantized_chunk = 2; 
+}
+
+// type "o"
+message Chunk { 
+	required Vertices vertices = 1;
+	required Faces faces = 2;
+	required string chunk_name = 3;
+	required string material_name = 4;
+}
+
+// type "h"
+message QuantizedChunk {
+	required string chunk_name = 1;
+	required string material_name = 2;
+	required QuantizedVertices vertices = 3;
+	repeated QuantizedUVs uvs = 4;
+	required Faces faces = 5;
+}
+
+// type r
+message QuantizedVertices {
+	required float quantization = 1;
+	repeated float translation = 2 [packed=true];
+	repeated sint32 x = 3 [packed=true];
+	repeated sint32 y = 4 [packed=true];
+	repeated sint32 z = 5 [packed=true];
+}
+
+
+// type n
+message Faces {
+	repeated int32 faces = 1 [packed=true];
+}
+
+// type a
+message QuantizedUVs { 
+	required string name = 1;
+	required float quantization = 2;
+	repeated sint32 u = 3 [packed=true]; 
+	repeated sint32 v = 4 [packed=true]; 
+}
+
+// type s
+message Vertices {
+	repeated float xyz = 1 [packed=true];
+	repeated float uv = 2 [packed=true];
+}
